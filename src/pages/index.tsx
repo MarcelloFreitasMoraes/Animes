@@ -1,9 +1,8 @@
+import React from "react"
+import Home from "./Home"
 
-
-export default function Home() {
+export default function MyApp() {
   return (
-    <p>
-      oiii
-    </p>
+<Home/>
   )
 }
