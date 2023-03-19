@@ -19,6 +19,7 @@ height: 32rem;
     background-image: url('topo.png');
     background-repeat: no-repeat;
     background-size: cover;
+    top: -22%;
 }
 `
 export const ColorOrange = styled.span`
