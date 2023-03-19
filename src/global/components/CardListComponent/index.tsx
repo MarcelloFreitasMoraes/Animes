@@ -32,7 +32,7 @@ export default function CardListComponent(props: HomeProps) {
       });
   }, [url]);
 
-  console.log(data, "aqui é a resposta dos cards");
+  console.log(data, "data");
   return (
     <M.Grid sx={{ marginLeft: "70px" }}>
       <M.Grid sx={{ marginLeft: "10px" }}>
