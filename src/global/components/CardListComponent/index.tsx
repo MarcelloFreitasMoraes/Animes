@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as M from "@mui/material";
 //import * as S from "./styles";
 import { Star } from "@/global/assets/Icons/Star";
-import CardComponent from "@/global/components/CardPopulares";
+import CardComponent from "@/global/components/Card";
 import axios from "axios";
 import { DataProps, HomeProps } from "@/global/@types/type";
 
