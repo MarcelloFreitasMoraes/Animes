@@ -28,3 +28,6 @@ color: var(--primary);
 export const ColorGrenn = styled.span`
 color: var(--secundary);
 `;
+export const ContainerSlider = styled.div`
+margin-top: 50px;
+`;

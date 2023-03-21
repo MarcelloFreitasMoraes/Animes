@@ -35,7 +35,7 @@ export default function CardListComponent(props: HomeProps) {
   console.log(data, "data");
   return (
     <M.Grid sx={{ marginLeft: "70px" }}>
-      <M.Grid sx={{ marginLeft: "10px" }}>
+      <M.Grid>
         <Star />
       </M.Grid>
       <M.Grid sx={{ display: "flex", marginTop: "20px " }}>
