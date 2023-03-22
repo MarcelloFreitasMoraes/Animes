@@ -4,6 +4,9 @@ import * as S from "../styles/styles";
 import Header from "@/global/components/Header";
 import CardListComponent from "@/global/components/CardListComponent";
 import Slider from "@/global/components/Slider";
+import { Star } from "@/global/assets/Icons/Star";
+import { Like } from "@/global/assets/Icons/Like";
+
 
 
 export default function Home() {
@@ -13,10 +16,15 @@ export default function Home() {
     <S.Container>
       <S.Back>
         <Header />
-        <CardListComponent sort="user_count"/>
-        <S.ContainerSlider>
+        <S.ContantSlider>
+        <CardListComponent sort="user_count" icon={<Star/>}/>
+        </S.ContantSlider>
+        <M.Box sx={{margin: '50px auto', width: '80%'}}>
           <Slider/>
-          </S.ContainerSlider>       
+          </M.Box>  
+          <S.ContainerSlider>
+          <CardListComponent sort="average_rating" icon={<Like/>}/>    
+          </S.ContainerSlider> 
       </S.Back>
     </S.Container>
   );

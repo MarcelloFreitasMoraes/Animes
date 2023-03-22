@@ -13,7 +13,7 @@ export default function Header() {
           <Image src={Logo} alt="Logo" width={192} height={118} />
         </M.Grid>
         <M.Grid
-          sx={{ position: "absolute", top: "19%", left: "78%", zIndex: "1" }}
+          sx={{ position: "absolute", top: "19%", left: "79%" }}
         >
           <InputComponent />
         </M.Grid>

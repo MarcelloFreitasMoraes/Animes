@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { Box } from "@mui/material";
 
-export const Container = styled.section`
+export const Container = styled(Box)`
 width: 100%;
 margin: 0 auto;
 `
-export const Back = styled.section`
+export const ContantSlider = styled(Box)`
+margin-top: -50px;
+`;
+export const Back = styled(Box)`
 width: 100%;
 height: 32rem;
 
@@ -15,7 +19,7 @@ height: 32rem;
     width: 100%;
     height: 32rem;
     z-index: 0;
-    opacity: #000000 30%;
+    background-color: rgba(0, 0, 0, 0.3);
     background-image: url('topo.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -28,6 +32,8 @@ color: var(--primary);
 export const ColorGrenn = styled.span`
 color: var(--secundary);
 `;
-export const ContainerSlider = styled.div`
-margin-top: 50px;
+export const ContainerSlider = styled(Box)`
+Svg {
+    margin-left: 10px
+}
 `;

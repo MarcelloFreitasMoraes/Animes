@@ -4,38 +4,6 @@ export const Container = styled.section`
 width:100%;
  margin: 0 auto;
 
-/* #app {
-  height: 100%;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-   margin-left: 15%;
-   text-align: start;
-   color: var(--light);
-   //background-color: var(--transparent);
-   
-}
-
-.swiper-slide img {
-  display: block;
-  width: 80%;
-  height: auto;
-  object-fit: cover;
-}
-
-.swiper-pagination-bullet-active {
-     background-color: var(--primary) !important;
-     
-}
-.swiper-pagination-bullets{
-  //margin-top: 20px;
-} */
-
 #app {
   height: 100%;
 }
@@ -79,7 +47,10 @@ body {
 
 .swiper-pagination-bullet-active {
      background-color: var(--primary) !important;
-     
 }
 
+.swiper-pagination-bullets{
+    top: 3px !important;
+    position: relative !important;
+}
 `

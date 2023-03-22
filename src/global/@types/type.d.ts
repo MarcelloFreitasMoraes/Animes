@@ -1,5 +1,6 @@
 export interface HomeProps {
     sort: string
+    icon?: jsx.element
 }
 
 export interface DataProps {
