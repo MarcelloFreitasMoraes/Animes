@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-max-width: 345px
+max-width: 345px;
 
 `;
 export const Card = styled.img`

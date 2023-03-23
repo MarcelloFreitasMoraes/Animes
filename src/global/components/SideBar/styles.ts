@@ -2,20 +2,23 @@ import styled from "styled-components";
 
 export const Container = styled.section`
     background-color: var(--primary);
-    position: fixed;
+    position: absolute;
     height: 100%;
     top: 0px;
     left: 0px;
-    width: 300px;
-    animation: showSidebar .5s;
-    
+    width: 280px;
+    animation: showSidebar .1s;
+    z-index: 999;
+    height: 118.5rem;
+
     > svg {
-        position: fixed;
+        position: absolute;
         color: white;
-        margin: 30px 0px 0 20px;
         width: 30px;
         height: 30px;
         cursor: pointer;
+        left: 15rem;
+        top: 5px;
     }
     @keyframes showSidebar {
         from {
@@ -24,11 +27,24 @@ export const Container = styled.section`
         }
         to {
         opacity: 1;
-        width: 300px;
+        width: 280px;
         }
     }
 `;
 
+export const Categorias = styled.div `
+    display: flex;
+    margin: 0 auto;
+    color: var(--light);
+    font-size: 20px;
+    font-weight: 700;
+
+    > svg{
+        width: 20px;
+        height: 23px;
+        margin-right: 7px;
+    }
+`;
 export const DisplayFlex = styled.div `
     height: 100%;
     display: flex;
@@ -46,33 +62,15 @@ export const Item = styled.p `
     text-transform: uppercase;
 `;
 
-export const DivRouter = styled.div `
-    margin-bottom: 10%;
-`;
-
-export const RouterGitHub = styled.img `
-    width: 30%;
-    margin: 0 35%;
-    border-radius: 50%;
-    &:hover {
-        background-color: rgb(255, 12, 24, 0.3);
-    }
-`;
-
 export const SidebarItem = styled.div `
     display: flex;
     align-items: center;
-    background-color: green; 
-    font-size: 20px;
-    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light);
     padding: 10px;
     cursor: pointer;
-    border-radius: 10px;
-    margin: 0 15px 20px;
-    text-transform: uppercase;
-    &:hover {
-        background-color: #911111;
-    }
+    margin-left: 4px;
 `;
 
 export const Icon = styled.img `

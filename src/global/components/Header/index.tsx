@@ -4,16 +4,22 @@ import * as M from "@mui/material";
 import Image from "next/image";
 import Logo from "@/global/assets/img/logo.png";
 import InputComponent from "@/global/components/Search";
+import { FaBars } from "react-icons/fa";
 
-export default function Header() {
+export default function Header({sidebar, setSidebar}: any) {
+
+  const showSidebar = () => setSidebar(!sidebar)
   return (
-    <>
-      <M.Grid container sx={{ position: "absolute", top: "0", zIndex: "1" }}>
-        <M.Grid sx={{ marginLeft: "183px" }}>
+    <S.Container>
+          <S.Svg>
+            <FaBars onClick={showSidebar} />
+            </S.Svg>  
+      <M.Grid>
+        <S.Img>
           <Image src={Logo} alt="Logo" width={192} height={118} />
-        </M.Grid>
+        </S.Img>
         <M.Grid
-          sx={{ position: "absolute", top: "19%", left: "79%" }}
+          sx={{ position: "absolute", top: "3%", left: "79%" }}
         >
           <InputComponent />
         </M.Grid>
@@ -37,6 +43,6 @@ export default function Header() {
           <S.ColorGrenn>Anime</S.ColorGrenn> do Mundo
         </M.Typography>
       </M.Grid>
-    </>
+    </S.Container>
   );
 }

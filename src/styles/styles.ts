@@ -11,7 +11,7 @@ margin-top: -50px;
 export const Back = styled(Box)`
 width: 100%;
 height: 32rem;
-
+z-index: 0;
 :before {
     content: ' ';
     display: block;
@@ -26,14 +26,23 @@ height: 32rem;
     top: -22%;
 }
 `
+
+export const SideBarTop = styled.div`
+`;
+
 export const ColorOrange = styled.span`
 color: var(--primary);
 `;
+
 export const ColorGrenn = styled.span`
 color: var(--secundary);
 `;
+
 export const ContainerSlider = styled(Box)`
 Svg {
     margin-left: 10px
-}
+}`;
+
+export const ContainerFooter = styled(Box)`
+margin-top: 128px;
 `;

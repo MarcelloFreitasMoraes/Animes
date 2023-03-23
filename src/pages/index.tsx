@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as M from "@mui/material";
 import * as S from "../styles/styles";
 import Header from "@/global/components/Header";
@@ -6,40 +6,34 @@ import CardListComponent from "@/global/components/CardListComponent";
 import Slider from "@/global/components/Slider";
 import { Star } from "@/global/assets/Icons/Star";
 import { Like } from "@/global/assets/Icons/Like";
-import { DataProps, HomeProps } from "@/global/@types/type";
+import FooterComponent from "@/global/components/Footer";
+import Sidebar from "@/global/components/SideBar";
 
+export default function Home() {
+  const [sidebar, setSidebar] = useState(false);
+  const ref = useRef(null);
 
-
-export default function Home(props: HomeProps) {
-  const { sort, icon } = props;
-  const [data, setData] = useState<DataProps>();
-
-  let url = `https://kitsu.io/api/edge/anime?page[limit]=5&page[offset]=0`;
-
-  if (sort === "user_count") {
-    url += "&sort=-user_count";
-  }
-
-  if (sort === "average_rating") {
-    url += "&sort=-average_rating";
-  }
+  const closeSidebar = (event: any) => {
+    //@ts-ignore
+    if (ref.current && !ref.current.contains(event.target)) {
+      setSidebar(false);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data.data);
-        console.log(response, "ress");
-      })
-      .catch(function (error) {
-        console.log(error.toJSON());
-      });
-  }, [url]);
-
+    document.addEventListener("click", closeSidebar, true);
+    return () => {
+      document.removeEventListener("click", closeSidebar, true);
+    };
+  }, []);
+  
   return (
     <S.Container>
-      <S.Back>
-        <Header />
+      <S.Back/>
+      <S.SideBarTop ref={ref} onClick={closeSidebar}>
+            {sidebar && <Sidebar active={setSidebar} />}
+          </S.SideBarTop>
+        <Header sidebar={sidebar} setSidebar={setSidebar} />
         <S.ContantSlider>
         <CardListComponent sort="user_count" icon={<Star/>}/>
         </S.ContantSlider>
@@ -49,7 +43,9 @@ export default function Home(props: HomeProps) {
           <S.ContainerSlider>
           <CardListComponent sort="average_rating" icon={<Like/>}/>    
           </S.ContainerSlider> 
-      </S.Back>
+          <S.ContainerFooter>
+      <FooterComponent/>
+      </S.ContainerFooter>  
     </S.Container>
   );
 }

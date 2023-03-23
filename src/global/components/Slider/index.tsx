@@ -6,6 +6,7 @@ import banner2 from "../../assets/img/banner2.png";
 import banner3 from "../../assets/img/banner3.png";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import * as M from "@mui/material";
 
 // Import Swiper styles
 import "swiper/css";
@@ -28,9 +29,8 @@ export default function Slider() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src={banner1} width={1267} height={302} alt={"banner"} />
-          {/* <p>NARUTO:  Incrível. Personagens simpáticos, uma história com coração e muita animação. A música também é fantástica.</p> */}
-        </SwiperSlide>
+          <Image src={banner1} width={1267} height={302} alt={"banner"} />         
+        </SwiperSlide>       
         <SwiperSlide>
           <Image src={banner2} width={1267} height={302} alt={"banner"} />
         </SwiperSlide>
