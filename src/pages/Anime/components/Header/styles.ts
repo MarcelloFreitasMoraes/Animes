@@ -6,6 +6,10 @@ export const Container = styled.header `
     display: flex;
     justify-content: space-between;
     align-items: center;     
+    height: 102px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    position: absolute;
 `;
 
 export const Svg = styled.div `

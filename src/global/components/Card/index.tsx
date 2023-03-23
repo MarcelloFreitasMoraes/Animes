@@ -7,7 +7,7 @@ export default function CardComponent(props: CardComponentProps) {
   return (
     <M.Card 
      onClick={props.action}
-    sx={{ maxWidth: 345, cursor: "pointer", borderRadius: 'none' }}   >
+    sx={{ maxWidth: 345, cursor: "pointer", borderRadius: 'none', boxShadow: 'none' }}   >
     <M.CardMedia
       sx={{ height: 319, width: 225, margin: '0 10px' }}
       image={props.image}

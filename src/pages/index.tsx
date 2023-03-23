@@ -10,7 +10,7 @@ import FooterComponent from "@/global/components/Footer";
 import Sidebar from "@/global/components/SideBar";
 
 export default function Home() {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(false);  
   const ref = useRef(null);
 
   const closeSidebar = (event: any) => {
@@ -31,9 +31,10 @@ export default function Home() {
     <S.Container>
       <S.Back/>
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
-            {sidebar && <Sidebar active={setSidebar} />}
+            {sidebar && <Sidebar active={setSidebar}/>}
           </S.SideBarTop>
         <Header sidebar={sidebar} setSidebar={setSidebar} />
+        <M.Grid  sx={{ marginLeft: "6rem" }}>
         <S.ContantSlider>
         <CardListComponent sort="user_count" icon={<Star/>}/>
         </S.ContantSlider>
@@ -43,6 +44,7 @@ export default function Home() {
           <S.ContainerSlider>
           <CardListComponent sort="average_rating" icon={<Like/>}/>    
           </S.ContainerSlider> 
+          </M.Grid>
           <S.ContainerFooter>
       <FooterComponent/>
       </S.ContainerFooter>  

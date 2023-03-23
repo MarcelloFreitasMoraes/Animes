@@ -1,8 +1,8 @@
 import { API } from "@/global/config/api";
 
-export const getAnimesClass = async () => {
+export const getCategorias = async () => {
   try {
-    const data  = await API.get('/anime?page[limit]=5&page[offset]=0&sort=-user_count');
+    const data  = await API.get('/categories?page[limit]=40&sort=-total_media_count');
 
     if (data) {
       return data;

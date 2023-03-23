@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import * as M from "@mui/material";
-//import * as S from "./styles";
 import CardComponent from "@/global/components/Card";
 import axios from "axios";
 import { DataProps, HomeProps } from "@/global/@types/type";
+import { useRouter } from "next/router";
 
 export default function CardListComponent(props: HomeProps) {
   const { sort, icon } = props;
   const [data, setData] = useState<DataProps>();
+  const { push } = useRouter()
 
   let url = `https://kitsu.io/api/edge/anime?page[limit]=5&page[offset]=0`;
 
@@ -24,14 +25,12 @@ export default function CardListComponent(props: HomeProps) {
       .get(url)
       .then((response) => {
         setData(response.data.data);
-        console.log(response, "ress");
       })
       .catch(function (error) {
         console.log(error.toJSON());
       });
   }, [url]);
 
-  console.log(data, "data");
   return (
     <M.Grid sx={{ marginLeft: "70px" }}>
       <M.Grid>
@@ -43,7 +42,7 @@ export default function CardListComponent(props: HomeProps) {
             return (
               <div key={index}>
                 <CardComponent
-                  action={() => {}}
+                  action={() => push(`/Anime?id=${item.id}`)}
                   image={item?.attributes?.posterImage?.original}
                 />
               </div>
