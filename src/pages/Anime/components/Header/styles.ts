@@ -15,7 +15,7 @@ export const Container = styled.header `
 export const Svg = styled.div `
  background-color: var(--primary);
  width: 70px;
- height: 102rem;
+ height: 78rem;
  position: absolute;
  z-index: 1;
     top: 0;

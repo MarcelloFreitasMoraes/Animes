@@ -9,7 +9,7 @@ export const Container = styled.section`
     width: 280px;
     animation: showSidebar .1s;
     z-index: 999;
-    height: 102rem;
+    height: 78rem;
 
     > svg {
         position: absolute;
@@ -68,7 +68,7 @@ export const SidebarItem = styled.div `
     font-size: 16px;
     font-weight: 400;
     color: var(--light);
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     margin-left: 50px;
     text-transform: capitalize;

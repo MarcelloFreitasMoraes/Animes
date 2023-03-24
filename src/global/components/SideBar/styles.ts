@@ -9,7 +9,7 @@ export const Container = styled.section`
     width: 280px;
     animation: showSidebar .1s;
     z-index: 999;
-    height: 117.7rem;
+   height: 119.2rem; 
 
     > svg {
         position: absolute;

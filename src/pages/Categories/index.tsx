@@ -3,21 +3,21 @@ import * as M from "@mui/material";
 import * as S from "./styles";
 import { API } from "@/global/config/api";
 import { useRouter } from "next/router";
-import Header from "./components/Header";
 import BannerDefault from "@/global/assets/img/default-banner.jpg";
 import { Youtube } from "@/global/assets/Icons/youtube";
 import { Heart } from "@/global/assets/Icons/Heart";
 import { StarCat } from "@/global/assets/Icons/StarCat";
 import FooterComponent from "@/global/components/Footer";
-import Sidebar from "./components/SideBar";
+import Sidebar from "../Anime/components/SideBar";
+import Header from "../Anime/components/Header";
 
-export default function Anime() {
+export default function Categories() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
   const ref = useRef(null);
 
   const router = useRouter();
-  const { id } = router.query;
+  const { category } = router.query;
 
   const closeSidebar = (event: any) => {
     //@ts-ignore
@@ -34,14 +34,19 @@ export default function Anime() {
   }, []);
 
   useEffect(() => {
-    API.get(`/anime/${id}`)
+    API.get(`/anime?filter[categories]=${category}`)
       .then((response) => {
         setData(response.data.data);
+        console.log(response, 'ress categoria');
+        
       })
       .catch(function (error) {
         console.log(error.toJSON());
       });
-  }, [id]);
+  }, [category]);
+
+  console.log(data, 'categoria');
+  
 
   return (
     <S.Container>
@@ -49,15 +54,15 @@ export default function Anime() {
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
       <Header sidebar={sidebar} setSidebar={setSidebar} />
-      <S.Banner
+      {/* <S.Banner
         src={
           data?.attributes?.coverImage.small
             ? data?.attributes?.coverImage.small
             : BannerDefault
         }
         alt="Banner"
-      />
-      <M.Container sx={{display: 'flex'}}>
+      /> */}
+      {/* <M.Container sx={{display: 'flex'}}>
       <S.Main>
         <S.Capa src={data?.attributes?.posterImage?.small} alt="Capa" />
         <M.Grid
@@ -111,7 +116,7 @@ export default function Anime() {
         </M.Container>
         <M.Grid sx={{marginTop: '18.5rem'}}>
        <FooterComponent/> 
-       </M.Grid>
+       </M.Grid> */}
     </S.Container>
   );
 }
