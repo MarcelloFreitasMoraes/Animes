@@ -101,7 +101,7 @@ export default function Anime() {
         </M.Grid>
       </S.Main>
         <M.Grid sx={{display: "flex", flexDirection: 'column'}}>
-            <M.Typography sx={{margin: '10px 0', textTransform: 'capitalize', fontSize: "14px", fontWeight: "400"}}>
+            <M.Typography sx={{margin: '10px 0', textTransform: 'capitalize', fontSize: "26px", fontWeight: "700"}}>
             {data?.attributes?.slug}
             </M.Typography>
             <M.Typography sx={{fontSize: "14px", fontWeight: "400"}}>
@@ -109,7 +109,7 @@ export default function Anime() {
             </M.Typography>
         </M.Grid>
         </M.Container>
-      {/* <FooterComponent/> */}
+       <FooterComponent/> 
     </S.Container>
   );
 }

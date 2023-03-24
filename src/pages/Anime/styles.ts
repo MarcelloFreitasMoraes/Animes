@@ -16,10 +16,11 @@ padding: 0 100px;
 text-align: center;
 text-align: center;
 width: 421px;
+margin-top: -100px;
 `
 
 export const Banner = styled.img`
-
+height: 505px;
 `;
 export const Capa = styled.img`
 width: 221px;
