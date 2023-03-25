@@ -4,13 +4,13 @@ import * as S from "./styles";
 import { API } from "@/global/config/api";
 import { useRouter } from "next/router";
 import Sidebar from "../Anime/components/SideBar";
-import Header from "../Anime/components/Header";
 import { FaFilm } from "react-icons/fa";
 import qs from "qs";
 import CardListComponent from "@/global/components/CardListComponent";
 import PaginationComponent from "@/global/components/Pagination";
+import Header from "./components/Header";
 
-export default function Categories() {
+export default function Teste() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
   const [offset, setOffset] = useState(0);
@@ -19,7 +19,7 @@ export default function Categories() {
   const ref = useRef(null);
 
   const router = useRouter();
-  const { category } = router.query;
+  const { category, specie } = router.query;
 
   const query = {
     page: {
@@ -53,15 +53,35 @@ export default function Categories() {
       });
   }, [offset]);
 
-  console.log(data, "categoria");
-  console.log(category, "category");
+  const [info, setInfo] = useState<any>({});
+  const [text, setText] = useState('');
+const api = 'https://kitsu.io/api/edge/';
+
+  useEffect(() => {
+    Filtrando()
+  }, [text]);
+
+  const Filtrando = () => {
+    if (text) {
+      setInfo({});
+
+      fetch(
+        `${api}anime?filter[text]=${text}&page[limit]=20`
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          setInfo(response);
+        });
+    }
+
+  }
 
   return (
     <S.Container>
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
-      <Header sidebar={sidebar} setSidebar={setSidebar} />
+      <Header sidebar={sidebar} setSidebar={setSidebar} text={text} setText={setText} Filtrando={Filtrando} />
       <M.Grid>
         <S.BoxText>
           {category && (
@@ -74,6 +94,18 @@ export default function Categories() {
               />
             </M.Box>
           )}
+          <>
+          {specie && (
+            <M.Box>
+              <CardListComponent
+                categoryes={specie}
+                limit={20}
+                icon={<FaFilm size={22} />}
+                title={specie}
+              />
+            </M.Box>
+          )}
+          </>
         </S.BoxText>
         <S.Main>
         {data && (

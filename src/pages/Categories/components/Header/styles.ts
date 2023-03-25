@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled.header `
-    position: absolute;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -15,7 +14,7 @@ export const Container = styled.header `
 export const Svg = styled.div `
  background-color: var(--primary);
  width: 70px;
- height: 62.8rem;
+ height: 92rem;
  position: absolute;
  z-index: 1;
  cursor: pointer;
@@ -36,6 +35,7 @@ export const Svg = styled.div `
 `;
 
 export const Img = styled(Box)`
+cursor: pointer;
 & img {
      position: absolute;
     top: 0;

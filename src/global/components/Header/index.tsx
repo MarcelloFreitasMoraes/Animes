@@ -24,7 +24,7 @@ export default function Header({sidebar, setSidebar}: any) {
         <M.Grid
           sx={{ position: "absolute", top: "3%", left: "78%" }}
         >
-          <InputComponent />
+          {/* <InputComponent /> */}
         </M.Grid>
       </M.Grid>
       <M.Grid

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Box, Button } from "@mui/material";
 
 export const Container = styled(Box)`
-width: fit-content;
+width: 100%;
 margin: 0 auto;
 `
 export const ContantSlider = styled(Box)`
@@ -20,7 +20,8 @@ margin-top: -100px;
 `
 
 export const Banner = styled.img`
-height: 505px;
+height: auto;
+width: 100%;
 `;
 export const Capa = styled.img`
 width: 221px;

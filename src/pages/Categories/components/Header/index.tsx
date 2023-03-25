@@ -6,8 +6,9 @@ import Logo from "@/global/assets/img/logo.png";
 import InputComponent from "@/global/components/Search";
 import { FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
+import SearchInput from "@/global/components/SearchInput";
 
-export default function Header({sidebar, setSidebar}: any) {
+export default function Header({sidebar, setSidebar, text, setText, Filtrando}: any) {
   const { push } = useRouter()
   const showSidebar = () => setSidebar(!sidebar)
   return (
@@ -16,7 +17,7 @@ export default function Header({sidebar, setSidebar}: any) {
             <FaBars onClick={showSidebar} />
             </S.Svg>  
       <M.Grid>
-        <S.Img
+        <S.Img        
         onClick={() => push(`/`)}
         >
           <Image src={Logo} alt="Logo" width={121} height={75} />
@@ -24,28 +25,16 @@ export default function Header({sidebar, setSidebar}: any) {
         <M.Grid
           sx={{ position: "absolute", top: "20px", left: "78%" }}
         >
-          <InputComponent />
-        </M.Grid>
-      </M.Grid>
-      {/* <M.Grid
-        container
-        sx={{
-          color: "#FFF",
-          position: "absolute",
-          top: "24%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          left: "4px",
+           <SearchInput
+        value={text}
+        onChange={(search: React.SetStateAction<string>) => setText(search)}
+        action={() => {
+          // push(`/Categories?specie=${item.id}`),
+          Filtrando()
         }}
-      >
-        <M.Typography variant="h2" sx={{ color: "#FFF", fontWeight: "700" }}>
-          O <S.ColorOrange>Maior</S.ColorOrange> Catálogo de
-        </M.Typography>
-        <M.Typography variant="h2" sx={{ color: "#FFF", fontWeight: "700" }}>
-          <S.ColorGrenn>Anime</S.ColorGrenn> do Mundo
-        </M.Typography>
-      </M.Grid> */}
+      />        
+        </M.Grid>
+      </M.Grid>  
     </S.Container>
   );
 }

@@ -5,7 +5,8 @@ export const Container = styled(Box)`
 width: 100%;
 height: 278px;
 background: var(--background);
-margin-top: 12rem;
+position: absolute;
+z-index: 1;
 `;
 export const BoxImg = styled(Box)`
 display: flex;

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import * as S from "./styles";
 
 export default function CardListComponent(props: HomeProps) {
-  const { sort, icon, categoryes, limit, title } = props;
+  const { sort, icon, categoryes, limit, title, specific } = props;
   const [data, setData] = useState<DataProps>();
   const { push } = useRouter();
 
@@ -25,6 +25,9 @@ export default function CardListComponent(props: HomeProps) {
 
   if (categoryes && categoryes !== "All") {
     url += `&filter[categories]=${categoryes}`;
+  }
+  if (specific && specific !== categoryes) {
+    url += `&filter[text]=${specific}`;
   }
 
   useEffect(() => {

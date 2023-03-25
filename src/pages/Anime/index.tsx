@@ -51,8 +51,8 @@ export default function Anime() {
       <Header sidebar={sidebar} setSidebar={setSidebar} />
       <S.Banner
         src={
-          data?.attributes?.coverImage.small
-            ? data?.attributes?.coverImage.small
+          data?.attributes?.coverImage?.small
+            ? data?.attributes?.coverImage?.small
             : BannerDefault
         }
         alt="Banner"

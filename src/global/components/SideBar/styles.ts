@@ -3,13 +3,12 @@ import styled from "styled-components";
 export const Container = styled.section`
     background-color: var(--primary);
     position: absolute;
-    height: 100%;
     top: 0px;
     left: 0px;
     width: 280px;
     animation: showSidebar .1s;
-    z-index: 999;
-    height: 106.9rem;
+      z-index: 2;
+    height: 121.9rem;
 
     > svg {
         position: absolute;

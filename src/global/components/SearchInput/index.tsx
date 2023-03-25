@@ -1,19 +1,20 @@
-import * as React from "react";
+import React, { useState } from 'react';
+import useDebounce from './useDebounce';
 import * as M from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import useDebounce from './useDebounce';
 
-export default function InputComponent({onchange, value, action}: any) {
-  const [displayValue, setDisplayValue] = React.useState(value);
-  const debouncedChange = useDebounce(onchange, 500);
+const SearchInput = ({ value, onChange, action }:any) => {
+  const [displayValue, setDisplayValue] = useState(value);
+  const debouncedChange = useDebounce(onChange, 500);
 
   function handleChange(event: { target: { value: any; }; }) {
     setDisplayValue(event.target.value);
     debouncedChange(event.target.value);
   }
+
   return (
     <M.Paper
-      sx={{
+    sx={{
         p: "2px 4px",
         display: "flex",
         alignItems: "center",
@@ -24,20 +25,22 @@ export default function InputComponent({onchange, value, action}: any) {
         backgroundColor: "transparent",
       }}
     >
-      <M.InputBase
+    <M.InputBase
         sx={{ ml: 1, flex: 1, color: "#FFF" }}
         placeholder="Buscar"
-        value={displayValue}
-        onChange={handleChange}
-        onClick={action}
-      />
-      <M.IconButton
+          type="search"
+          value={displayValue}
+          onChange={handleChange} />
+           <M.IconButton
         type="button"
         sx={{ p: "10px", color: "#FFF", padding: '0' }}
         aria-label="search"
+        onClick={action}
       >
         <SearchIcon />
       </M.IconButton>
-    </M.Paper>
+          </M.Paper>
   );
-}
+};
+
+export default SearchInput;
