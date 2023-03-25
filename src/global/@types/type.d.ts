@@ -1,6 +1,9 @@
 export interface HomeProps {
-    sort: string
+    sort?: string
+    categoryes?: any
+    limit?: any
     icon?: jsx.element
+    title?: any
 }
 
 export interface DataProps {

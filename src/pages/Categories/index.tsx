@@ -3,21 +3,30 @@ import * as M from "@mui/material";
 import * as S from "./styles";
 import { API } from "@/global/config/api";
 import { useRouter } from "next/router";
-import BannerDefault from "@/global/assets/img/default-banner.jpg";
-import { Youtube } from "@/global/assets/Icons/youtube";
-import { Heart } from "@/global/assets/Icons/Heart";
-import { StarCat } from "@/global/assets/Icons/StarCat";
-import FooterComponent from "@/global/components/Footer";
 import Sidebar from "../Anime/components/SideBar";
 import Header from "../Anime/components/Header";
+import { FaFilm } from "react-icons/fa";
+import qs from "qs";
+import CardListComponent from "@/global/components/CardListComponent";
+import PaginationComponent from "@/global/components/Pagination";
 
 export default function Categories() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
+  const [offset, setOffset] = useState(0);
+  const [categories, setCategories] = useState();
+  const LIMIT = 20;
   const ref = useRef(null);
 
   const router = useRouter();
   const { category } = router.query;
+
+  const query = {
+    page: {
+      limit: LIMIT,
+      offset,
+    },
+  };
 
   const closeSidebar = (event: any) => {
     //@ts-ignore
@@ -34,19 +43,18 @@ export default function Categories() {
   }, []);
 
   useEffect(() => {
-    API.get(`/anime?filter[categories]=${category}`)
+    API.get(`/anime?${category}&${qs.stringify(query)}`)
       .then((response) => {
-        setData(response.data.data);
-        console.log(response, 'ress categoria');
-        
+        setData(response?.data);
+        console.log(response, "ress categoria");
       })
       .catch(function (error) {
         console.log(error.toJSON());
       });
-  }, [category]);
+  }, [offset]);
 
-  console.log(data, 'categoria');
-  
+  console.log(data, "categoria");
+  console.log(category, "category");
 
   return (
     <S.Container>
@@ -54,69 +62,30 @@ export default function Categories() {
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
       <Header sidebar={sidebar} setSidebar={setSidebar} />
-      {/* <S.Banner
-        src={
-          data?.attributes?.coverImage.small
-            ? data?.attributes?.coverImage.small
-            : BannerDefault
-        }
-        alt="Banner"
-      /> */}
-      {/* <M.Container sx={{display: 'flex'}}>
-      <S.Main>
-        <S.Capa src={data?.attributes?.posterImage?.small} alt="Capa" />
-        <M.Grid
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "20px 0",
-          }}
-        >
-          <S.ButtonTrailler variant="contained">
-            <Youtube />
-            VER TRAILER
-          </S.ButtonTrailler>
-        </M.Grid>
-        <M.Typography
-          sx={{ color: "#16A085", fontSize: "14px", fontWeight: "500" }}
-        >
-          Aprovado por {data?.attributes?.averageRating}% <br /> da Comunidade
-        </M.Typography>
-        <M.Grid
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            margin: "20px 0",
-          }}
-        >
-          <M.Typography
-            sx={{ fontSize: "14px", fontWeight: "500", color: "#3D3D3D", marginRight: '49px' }}
-          >
-            {" "}
-            <Heart /> # {data?.attributes?.popularityRank} Mais Popular
-          </M.Typography>
-          <M.Grid>
-            <M.Typography
-              sx={{ fontSize: "14px", fontWeight: "500", color: "#3D3D3D", marginTop: '10px' }}
-            >
-              <StarCat /> # {data?.attributes?.ratingRank} Melhor Classificado
-            </M.Typography>
-          </M.Grid>
-        </M.Grid>
-      </S.Main>
-        <M.Grid sx={{display: "flex", flexDirection: 'column'}}>
-            <M.Typography sx={{margin: '10px 0', textTransform: 'capitalize', fontSize: "26px", fontWeight: "700"}}>
-            {data?.attributes?.slug}
-            </M.Typography>
-            <M.Typography sx={{fontSize: "14px", fontWeight: "400"}}>
-            {data?.attributes?.description}
-            </M.Typography>
-        </M.Grid>
-        </M.Container>
-        <M.Grid sx={{marginTop: '18.5rem'}}>
-       <FooterComponent/> 
-       </M.Grid> */}
+      <M.Grid>
+        <S.BoxText>
+          {category && (
+            <M.Box>
+              <CardListComponent
+                categoryes={category}
+                limit={20}
+                icon={<FaFilm size={22} />}
+                title={category}
+              />
+            </M.Box>
+          )}
+        </S.BoxText>
+        <S.Main>
+        {data && (
+                <PaginationComponent
+                    limit={LIMIT}
+                    total={data?.meta?.count}
+                    offset={offset}
+                    setOffset={setOffset}
+                />
+            )}
+        </S.Main>
+      </M.Grid>
     </S.Container>
   );
 }

@@ -3,9 +3,9 @@ import { Box } from "@mui/material";
 
 export const Container = styled(Box)`
 width: 100%;
-height: 276px;
+height: 278px;
 background: var(--background);
-margin-top: 9.6rem;
+margin-top: 12rem;
 `;
 export const BoxImg = styled(Box)`
 display: flex;

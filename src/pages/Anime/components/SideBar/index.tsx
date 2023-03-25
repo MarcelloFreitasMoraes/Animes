@@ -5,9 +5,12 @@ import * as S from "./styles";
 import { FaList, FaTimes } from "react-icons/fa";
 import { SideProps } from "./types";
 import { getCategorias } from "@/services/AnimeService";
+import { useRouter } from "next/router";
 
 const Sidebar = ({ active }: SideProps) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
+  const { push } = useRouter()
+  
   const closeSidebar = () => {
     active(false);
   };
@@ -38,8 +41,13 @@ const Sidebar = ({ active }: SideProps) => {
           <Link href={"/"}>
             {data &&
               Object.values(data).map((item: any, index) => {
+                console.log(item, 'item');
+                
                 return (
-                  <S.SidebarItem key={index}>
+                  <S.SidebarItem
+                   key={index}
+                   onClick={() => push(`/Categories?category=${item?.attributes?.slug}`)}
+                   >
                     {item?.attributes?.slug}
                   </S.SidebarItem>
                 );

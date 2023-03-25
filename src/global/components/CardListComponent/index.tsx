@@ -4,13 +4,16 @@ import CardComponent from "@/global/components/Card";
 import axios from "axios";
 import { DataProps, HomeProps } from "@/global/@types/type";
 import { useRouter } from "next/router";
+import * as S from "./styles";
 
 export default function CardListComponent(props: HomeProps) {
-  const { sort, icon } = props;
+  const { sort, icon, categoryes, limit, title } = props;
   const [data, setData] = useState<DataProps>();
-  const { push } = useRouter()
+  const { push } = useRouter();
 
-  let url = `https://kitsu.io/api/edge/anime?page[limit]=5&page[offset]=0`;
+  let url = `https://kitsu.io/api/edge/anime?page[limit]=${
+    limit ?? 5
+  }&page[offset]=0`;
 
   if (sort === "user_count") {
     url += "&sort=-user_count";
@@ -18,6 +21,10 @@ export default function CardListComponent(props: HomeProps) {
 
   if (sort === "average_rating") {
     url += "&sort=-average_rating";
+  }
+
+  if (categoryes && categoryes !== "All") {
+    url += `&filter[categories]=${categoryes}`;
   }
 
   useEffect(() => {
@@ -33,10 +40,22 @@ export default function CardListComponent(props: HomeProps) {
 
   return (
     <M.Grid sx={{ marginLeft: "70px" }}>
-      <M.Grid>
+      <M.Grid
+        sx={{ display: "flex", alignItems: "center", margin: "15px 0 0 12px" }}
+      >
         {icon}
+        <M.Typography
+          sx={{
+            color: "#F46D1B",
+            fontSize: "22px",
+            fontWeight: "700",
+            paddingLeft: "10px",
+          }}
+        >
+          {title}
+        </M.Typography>
       </M.Grid>
-      <M.Grid sx={{ display: "flex", marginTop: "20px " }}>
+      <S.Test>
         {data &&
           Object.values(data).map((item, index) => {
             return (
@@ -48,7 +67,7 @@ export default function CardListComponent(props: HomeProps) {
               </div>
             );
           })}
-      </M.Grid>
+      </S.Test>
     </M.Grid>
   );
 }

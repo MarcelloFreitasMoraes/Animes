@@ -5,9 +5,10 @@ import Image from "next/image";
 import Logo from "@/global/assets/img/logo.png";
 import InputComponent from "@/global/components/Search";
 import { FaBars } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 export default function Header({sidebar, setSidebar}: any) {
-
+  const { push } = useRouter()
   const showSidebar = () => setSidebar(!sidebar)
   return (
     <S.Container>
@@ -15,11 +16,13 @@ export default function Header({sidebar, setSidebar}: any) {
             <FaBars onClick={showSidebar} />
             </S.Svg>  
       <M.Grid>
-        <S.Img>
+        <S.Img
+        onClick={() => push(`/`)}
+        >
           <Image src={Logo} alt="Logo" width={192} height={118} />
         </S.Img>
         <M.Grid
-          sx={{ position: "absolute", top: "3%", left: "79%" }}
+          sx={{ position: "absolute", top: "3%", left: "78%" }}
         >
           <InputComponent />
         </M.Grid>

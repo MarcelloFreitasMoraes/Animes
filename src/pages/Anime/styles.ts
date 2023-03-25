@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Box, Button } from "@mui/material";
 
 export const Container = styled(Box)`
-width: 100%;
+width: fit-content;
 margin: 0 auto;
 `
 export const ContantSlider = styled(Box)`

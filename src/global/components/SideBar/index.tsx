@@ -8,7 +8,7 @@ import { getCategorias } from "@/services/AnimeService";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ active }: SideProps) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
   const { push } = useRouter()
   const closeSidebar = () => {
     active(false);
@@ -44,7 +44,7 @@ const Sidebar = ({ active }: SideProps) => {
                   
                   <S.SidebarItem 
                   key={index}
-                  onClick={() => push(`/Categories?name=${item.id}`)}
+                  onClick={() => push(`/Categories?category=${item?.attributes?.slug}`)}
                   >
                     {item?.attributes?.slug}
                   </S.SidebarItem>

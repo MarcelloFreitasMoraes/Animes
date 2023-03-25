@@ -11,7 +11,7 @@ export const Container = styled.header `
 export const Svg = styled.div `
  background-color: var(--primary);
  width: 70px;
- height: 119.2rem;
+ height: 106.9rem;
  position: absolute;
  z-index: 1;
     top: 0;
@@ -34,7 +34,7 @@ export const Img = styled(Box)`
 & img {
      position: absolute;
     top: 0;
-    left: 7rem;
+    left: 11rem;
     right: 0;
     z-index: 1;
 } 

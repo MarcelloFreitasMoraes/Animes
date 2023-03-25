@@ -9,13 +9,12 @@ export const Container = styled.header `
     height: 102px;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 100;
-    position: absolute;
 `;
 
 export const Svg = styled.div `
  background-color: var(--primary);
  width: 70px;
- height: 78rem;
+ height: 92rem;
  position: absolute;
  z-index: 1;
     top: 0;

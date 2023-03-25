@@ -34,7 +34,7 @@ export default function Home() {
             {sidebar && <Sidebar active={setSidebar}/>}
           </S.SideBarTop>
         <Header sidebar={sidebar} setSidebar={setSidebar} />
-        <M.Grid  sx={{ marginLeft: "6rem" }}>
+        <M.Grid  sx={{ marginLeft: "2rem" }}>
         <S.ContantSlider>
         <CardListComponent sort="user_count" icon={<Star/>}/>
         </S.ContantSlider>
