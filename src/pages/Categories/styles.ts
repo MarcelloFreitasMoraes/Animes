@@ -16,7 +16,12 @@ display: flex;
 justify-content: flex-end;
 margin-right: 50px;
 `
-
-
 export const SideBarTop = styled.div`
 `;
+
+export const Test = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 30px;
+`

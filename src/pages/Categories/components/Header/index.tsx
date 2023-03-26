@@ -3,14 +3,14 @@ import * as S from "./styles";
 import * as M from "@mui/material";
 import Image from "next/image";
 import Logo from "@/global/assets/img/logo.png";
-import InputComponent from "@/global/components/Search";
 import { FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
 import SearchInput from "@/global/components/SearchInput";
 
-export default function Header({sidebar, setSidebar, text, setText, Filtrando}: any) {
+export default function Header({sidebar, setSidebar, text, setText, info}: any) {
   const { push } = useRouter()
   const showSidebar = () => setSidebar(!sidebar)
+  
   return (
     <S.Container>
           <S.Svg>
@@ -26,12 +26,8 @@ export default function Header({sidebar, setSidebar, text, setText, Filtrando}: 
           sx={{ position: "absolute", top: "20px", left: "78%" }}
         >
            <SearchInput
-        value={text}
-        onChange={(search: React.SetStateAction<string>) => setText(search)}
-        action={() => {
-          // push(`/Categories?specie=${item.id}`),
-          Filtrando()
-        }}
+           text={text}
+           setText={setText}        
       />        
         </M.Grid>
       </M.Grid>  

@@ -4,6 +4,7 @@ export interface HomeProps {
     limit?: any
     icon?: jsx.element
     title?: any
+    specific?: any
 }
 
 export interface DataProps {

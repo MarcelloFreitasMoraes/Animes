@@ -26,9 +26,10 @@ export default function CardListComponent(props: HomeProps) {
   if (categoryes && categoryes !== "All") {
     url += `&filter[categories]=${categoryes}`;
   }
-  if (specific && specific !== categoryes) {
+  if (specific && specific === "All") {
     url += `&filter[text]=${specific}`;
   }
+console.log(categoryes, 'categoryes');
 
   useEffect(() => {
     axios

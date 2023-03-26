@@ -9,24 +9,20 @@ import qs from "qs";
 import CardListComponent from "@/global/components/CardListComponent";
 import PaginationComponent from "@/global/components/Pagination";
 import Header from "./components/Header";
+import CardComponent from "@/global/components/Card";
 
 export default function Teste() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
   const [offset, setOffset] = useState(0);
+  const [info, setInfo] = useState<any>({});
+  const [text, setText] = useState("");
   const [categories, setCategories] = useState();
   const LIMIT = 20;
   const ref = useRef(null);
-
+  const { push } = useRouter();
   const router = useRouter();
-  const { category, specie } = router.query;
-
-  const query = {
-    page: {
-      limit: LIMIT,
-      offset,
-    },
-  };
+  const { category } = router.query;
 
   const closeSidebar = (event: any) => {
     //@ts-ignore
@@ -42,80 +38,108 @@ export default function Teste() {
     };
   }, []);
 
-  useEffect(() => {
-    API.get(`/anime?${category}&${qs.stringify(query)}`)
+  const api = "https://kitsu.io/api/edge/";
+
+   useEffect(() => {
+    setInfo({});
+
+    const query = {
+      page: {
+        limit: LIMIT,
+        offset,
+      },
+      filter: {
+        text,
+      }
+    };
+
+    if (text) {
+      query.filter = {
+        text,
+      };
+    }
+
+    fetch(`${api}anime?${qs.stringify(query)}`)
+      .then((response) => response.json())
       .then((response) => {
+        setInfo(response);
         setData(response?.data);
-        console.log(response, "ress categoria");
       })
       .catch(function (error) {
         console.log(error.toJSON());
       });
-  }, [offset]);
-
-  const [info, setInfo] = useState<any>({});
-  const [text, setText] = useState('');
-const api = 'https://kitsu.io/api/edge/';
-
-  useEffect(() => {
-    Filtrando()
-  }, [text]);
-
-  const Filtrando = () => {
-    if (text) {
-      setInfo({});
-
-      fetch(
-        `${api}anime?filter[text]=${text}&page[limit]=20`
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          setInfo(response);
-        });
-    }
-
-  }
+  }, [text, offset]);
 
   return (
     <S.Container>
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
-      <Header sidebar={sidebar} setSidebar={setSidebar} text={text} setText={setText} Filtrando={Filtrando} />
+      <Header
+        sidebar={sidebar}
+        setSidebar={setSidebar}
+        text={text}
+        setText={setText}
+      />
       <M.Grid>
         <S.BoxText>
-          {category && (
-            <M.Box>
-              <CardListComponent
-                categoryes={category}
-                limit={20}
-                icon={<FaFilm size={22} />}
-                title={category}
-              />
-            </M.Box>
+          {data && !text ? (
+            <>
+              {category && (
+                <M.Box>
+                  <CardListComponent
+                    categoryes={category}
+                    limit={20}
+                    icon={<FaFilm size={22} />}
+                    title={category}
+                  />
+                </M.Box>
+              )}
+            </>
+          ) : (
+            <>
+              {text && (
+                <>
+                  {info.data && (
+                    <M.Grid sx={{ marginLeft: "70px" }}>
+                      <S.Test>
+                        {info?.data?.map(
+                          (
+                            item: {
+                              id: any;
+                              attributes: { posterImage: { original: string } };
+                            },
+                            index: React.Key | null | undefined
+                          ) => {
+                            return (
+                              <div key={index}>
+                                <CardComponent
+                                  action={() => push(`/Anime?id=${item.id}`)}
+                                  image={
+                                    item?.attributes?.posterImage?.original
+                                  }
+                                />
+                              </div>
+                            );
+                          }
+                        )}
+                      </S.Test>
+                    </M.Grid>
+                  )}
+                </>
+              )}
+            </>
           )}
-          <>
-          {specie && (
-            <M.Box>
-              <CardListComponent
-                categoryes={specie}
-                limit={20}
-                icon={<FaFilm size={22} />}
-                title={specie}
-              />
-            </M.Box>
-          )}
-          </>
         </S.BoxText>
         <S.Main>
-        {data && (
-                <PaginationComponent
-                    limit={LIMIT}
-                    total={data?.meta?.count}
-                    offset={offset}
-                    setOffset={setOffset}
-                />
-            )}
+          {/* {data && info?.data && ( */}
+          <PaginationComponent
+            limit={LIMIT}
+            total={data?.meta?.count}
+            offset={offset}
+            setOffset={setOffset}
+          />
+          {/* )} */}
         </S.Main>
       </M.Grid>
     </S.Container>

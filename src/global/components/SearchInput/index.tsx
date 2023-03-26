@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import useDebounce from './useDebounce';
 import * as M from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from 'next/router';
 
-const SearchInput = ({ value, onChange, action }:any) => {
-  const [displayValue, setDisplayValue] = useState(value);
-  const debouncedChange = useDebounce(onChange, 500);
+const SearchInput = ({ text, setText }:any) => {
 
-  function handleChange(event: { target: { value: any; }; }) {
-    setDisplayValue(event.target.value);
-    debouncedChange(event.target.value);
-  }
-
+  const { push } = useRouter()
   return (
     <M.Paper
     sx={{
@@ -29,13 +23,17 @@ const SearchInput = ({ value, onChange, action }:any) => {
         sx={{ ml: 1, flex: 1, color: "#FFF" }}
         placeholder="Buscar"
           type="search"
-          value={displayValue}
-          onChange={handleChange} />
+          value={text}
+        onChange={(e: any) => setText(e.target.value)}
+         />
+
            <M.IconButton
         type="button"
         sx={{ p: "10px", color: "#FFF", padding: '0' }}
         aria-label="search"
-        onClick={action}
+        onClick={() => {
+          push(`/Categories?category=${text}`)
+       }}
       >
         <SearchIcon />
       </M.IconButton>

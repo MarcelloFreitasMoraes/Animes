@@ -3,9 +3,9 @@ import * as S from "./styles";
 import * as M from "@mui/material";
 import Image from "next/image";
 import Logo from "@/global/assets/img/logo.png";
-import InputComponent from "@/global/components/Search";
 import { FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
+import SearchInput from "@/global/components/SearchInput";
 
 export default function Header({sidebar, setSidebar}: any) {
   const { push } = useRouter()
@@ -24,28 +24,9 @@ export default function Header({sidebar, setSidebar}: any) {
         <M.Grid
           sx={{ position: "absolute", top: "20px", left: "78%" }}
         >
-          <InputComponent />
+              <SearchInput />   
         </M.Grid>
-      </M.Grid>
-      {/* <M.Grid
-        container
-        sx={{
-          color: "#FFF",
-          position: "absolute",
-          top: "24%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          left: "4px",
-        }}
-      >
-        <M.Typography variant="h2" sx={{ color: "#FFF", fontWeight: "700" }}>
-          O <S.ColorOrange>Maior</S.ColorOrange> Catálogo de
-        </M.Typography>
-        <M.Typography variant="h2" sx={{ color: "#FFF", fontWeight: "700" }}>
-          <S.ColorGrenn>Anime</S.ColorGrenn> do Mundo
-        </M.Typography>
-      </M.Grid> */}
+      </M.Grid>     
     </S.Container>
   );
 }
