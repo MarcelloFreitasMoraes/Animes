@@ -40,7 +40,7 @@ export default function Teste() {
 
   const api = "https://kitsu.io/api/edge/";
 
-   useEffect(() => {
+  useEffect(() => {
     setInfo({});
 
     const query = {
@@ -50,7 +50,7 @@ export default function Teste() {
       },
       filter: {
         text,
-      }
+      },
     };
 
     if (text) {
@@ -69,6 +69,7 @@ export default function Teste() {
         console.log(error.toJSON());
       });
   }, [text, offset]);
+console.log(info.data, 'ts');
 
   return (
     <S.Container>
@@ -102,6 +103,25 @@ export default function Teste() {
                 <>
                   {info.data && (
                     <M.Grid sx={{ marginLeft: "70px" }}>
+                      <M.Grid
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          margin: "15px 0 0 12px",
+                        }}
+                      >
+                        <FaFilm size={22} />
+                        <M.Typography
+                          sx={{
+                            color: "#F46D1B",
+                            fontSize: "22px",
+                            fontWeight: "700",
+                            paddingLeft: "10px",
+                          }}
+                        >
+                          {info?.data[0]?.attributes?.abbreviatedTitles[0]}
+                        </M.Typography>
+                      </M.Grid>
                       <S.Test>
                         {info?.data?.map(
                           (
