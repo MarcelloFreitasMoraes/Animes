@@ -48,7 +48,7 @@ export default function Anime() {
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
-      <Header sidebar={sidebar} setSidebar={setSidebar} />
+      <Header sidebar={sidebar} setSidebar={setSidebar} info={data}/>
       <S.Banner
         src={
           data?.attributes?.coverImage?.small

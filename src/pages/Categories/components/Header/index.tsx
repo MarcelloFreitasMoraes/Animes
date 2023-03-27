@@ -25,10 +25,7 @@ export default function Header({sidebar, setSidebar, text, setText, info}: any) 
         <M.Grid
           sx={{ position: "absolute", top: "20px", left: "78%" }}
         >
-           <SearchInput
-           text={text}
-           setText={setText}        
-      />        
+           <SearchInput/>        
         </M.Grid>
       </M.Grid>  
     </S.Container>

@@ -7,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
 import SearchInput from "../SearchInput";
 
-export default function Header({sidebar, setSidebar}: any) {
+export default function Header({sidebar, setSidebar, info}: any) {
   const { push } = useRouter()
   const showSidebar = () => setSidebar(!sidebar)
   return (
@@ -24,7 +24,7 @@ export default function Header({sidebar, setSidebar}: any) {
         <M.Grid
           sx={{ position: "absolute", top: "3%", left: "78%" }}
         >
-         <SearchInput />  
+           <SearchInput />  
         </M.Grid>
       </M.Grid>
       <M.Grid

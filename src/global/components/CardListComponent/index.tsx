@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
 import * as M from "@mui/material";
-import CardComponent from "@/global/components/Card";
+import CardComponent from "@/global/components/CardComponent";
 import axios from "axios";
 import { DataProps, HomeProps } from "@/global/@types/type";
 import { useRouter } from "next/router";
 import * as S from "./styles";
+import qs from "qs";
+import PaginationComponent from "../Pagination";
 
 export default function CardListComponent(props: HomeProps) {
-  const { sort, icon, categoryes, limit, title, specific } = props;
-  const [data, setData] = useState<DataProps>();
-  const { push } = useRouter();
+  const { sort, icon, categoryes, title, text, limit } = props;
+const [data, setData] = useState<DataProps>();
+const [offset, setOffset] = useState<number>(0);
+const { push } = useRouter();
 
-  let url = `https://kitsu.io/api/edge/anime?page[limit]=${
-    limit ?? 5
-  }&page[offset]=0`;
+const createUrl = () => {
+  const query = {
+    page: {
+      limit: limit ?? 5,
+      offset,
+    },
+  };
+  let url = `https://kitsu.io/api/edge/anime?${qs.stringify(query)}`;
 
   if (sort === "user_count") {
     url += "&sort=-user_count";
@@ -26,21 +34,24 @@ export default function CardListComponent(props: HomeProps) {
   if (categoryes && categoryes !== "All") {
     url += `&filter[categories]=${categoryes}`;
   }
-  if (specific && specific === "All") {
-    url += `&filter[text]=${specific}`;
-  }
-console.log(categoryes, 'categoryes');
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error.toJSON());
-      });
-  }, [url]);
+  if (text) {
+    url += `&filter[text]=${text}`;
+  }
+  return url;
+};
+
+useEffect(() => {
+  const url = createUrl();
+  axios
+    .get(url)
+    .then((response) => {
+      setData(response.data.data);
+    })
+    .catch((error) => {
+      console.log(error.toJSON());
+    });
+}, [sort, categoryes, text, offset]);
 
   return (
     <M.Grid sx={{ marginLeft: "70px" }}>
@@ -71,6 +82,15 @@ console.log(categoryes, 'categoryes');
               </div>
             );
           })}
+          <>
+          {categoryes &&
+          <PaginationComponent
+            total={data?.meta?.count}
+            offset={offset}
+            setOffset={setOffset}
+            />
+          }
+          </>
       </S.Test>
     </M.Grid>
   );

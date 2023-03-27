@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as M from "@mui/material";
 import * as S from "./styles";
-import { API } from "@/global/config/api";
 import { useRouter } from "next/router";
 import Sidebar from "../Anime/components/SideBar";
 import { FaFilm } from "react-icons/fa";
@@ -9,15 +8,14 @@ import qs from "qs";
 import CardListComponent from "@/global/components/CardListComponent";
 import PaginationComponent from "@/global/components/Pagination";
 import Header from "./components/Header";
-import CardComponent from "@/global/components/Card";
+import CardComponent from "@/global/components/CardComponent";
 
-export default function Teste() {
+export default function Categories() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
   const [offset, setOffset] = useState(0);
   const [info, setInfo] = useState<any>({});
   const [text, setText] = useState("");
-  const [categories, setCategories] = useState();
   const LIMIT = 20;
   const ref = useRef(null);
   const { push } = useRouter();
@@ -36,40 +34,43 @@ export default function Teste() {
     return () => {
       document.removeEventListener("click", closeSidebar, true);
     };
-  }, []);
+  }, []);  
 
-  const api = "https://kitsu.io/api/edge/";
+let api = "https://kitsu.io/api/edge/";
 
-  useEffect(() => {
-    setInfo({});
-
-    const query = {
-      page: {
-        limit: LIMIT,
-        offset,
-      },
-      filter: {
-        text,
-      },
-    };
-
-    if (text) {
-      query.filter = {
-        text,
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setInfo({});
+      setData({})
+      const query = {
+        page: {
+          limit: LIMIT,
+          offset,          
+        },
+        filter: {           
+          text           
+      }
       };
+      // if (text) {
+      //   query.filter = {
+      //     text,
+      //   };
+      // }
+      const response = await fetch(`${api}anime?${qs.stringify(query)}`);
+      const  data  = await response.json();
+      setInfo(data);
+      setData(data);
+    } 
+    catch (error) {
+      console.log(error.toJSON());
     }
+  };
 
-    fetch(`${api}anime?${qs.stringify(query)}`)
-      .then((response) => response.json())
-      .then((response) => {
-        setInfo(response);
-        setData(response?.data);
-      })
-      .catch(function (error) {
-        console.log(error.toJSON());
-      });
-  }, [text, offset]);
-console.log(info.data, 'ts');
+  fetchData();
+}, [text, offset]);
+
+console.log("data>>>>>>>>>>>>>>>>>>>>>>>",data);
 
   return (
     <S.Container>
@@ -79,13 +80,13 @@ console.log(info.data, 'ts');
       <Header
         sidebar={sidebar}
         setSidebar={setSidebar}
-        text={text}
-        setText={setText}
+        // text={text}
+        // setText={setText}
       />
       <M.Grid>
         <S.BoxText>
-          {data && !text ? (
-            <>
+          {/* {data  ? ( */}
+            {/* <> */}
               {category && (
                 <M.Box>
                   <CardListComponent
@@ -93,14 +94,15 @@ console.log(info.data, 'ts');
                     limit={20}
                     icon={<FaFilm size={22} />}
                     title={category}
+                    // text={text}                    
                   />
                 </M.Box>
               )}
-            </>
-          ) : (
-            <>
-              {text && (
-                <>
+            {/* </>
+            ) : (
+            <> */}
+              {/* {text && ( */}
+                {/* <>
                   {info.data && (
                     <M.Grid sx={{ marginLeft: "70px" }}>
                       <M.Grid
@@ -121,8 +123,8 @@ console.log(info.data, 'ts');
                         >
                           {info?.data[0]?.attributes?.abbreviatedTitles[0]}
                         </M.Typography>
-                      </M.Grid>
-                      <S.Test>
+                      </M.Grid> */}
+                      {/* <S.Test>
                         {info?.data?.map(
                           (
                             item: {
@@ -143,24 +145,25 @@ console.log(info.data, 'ts');
                             );
                           }
                         )}
-                      </S.Test>
-                    </M.Grid>
-                  )}
-                </>
-              )}
-            </>
-          )}
+                      </S.Test> */}
+                    {/* </M.Grid> */}
+                  {/* )} */}
+                {/* </> */}
+               {/* )} */}
+            {/* </> */}
+          {/* )} */}
         </S.BoxText>
-        <S.Main>
-          {/* {data && info?.data && ( */}
+        {/* {text &&  */}
+        {/* <S.Main>
+          {info?.data && (
           <PaginationComponent
-            limit={LIMIT}
-            total={data?.meta?.count}
+            total={info?.data?.meta?.count}
             offset={offset}
             setOffset={setOffset}
           />
-          {/* )} */}
-        </S.Main>
+           )} 
+        </S.Main> */}
+        {/* } */}
       </M.Grid>
     </S.Container>
   );

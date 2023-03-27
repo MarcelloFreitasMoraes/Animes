@@ -7,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
 import SearchInput from "@/global/components/SearchInput";
 
-export default function Header({sidebar, setSidebar}: any) {
+export default function Header({sidebar, setSidebar, info}: any) {
   const { push } = useRouter()
   const showSidebar = () => setSidebar(!sidebar)
   return (

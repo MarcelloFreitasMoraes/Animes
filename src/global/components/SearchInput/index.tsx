@@ -1,11 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as M from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useRouter } from 'next/router';
+import { API } from '@/global/config/api';
 
-const SearchInput = ({ text, setText }:any) => {
+const SearchInput = () => {
+  const [text, setText] = useState("");
+  const offset: any = 0; 
 
-  const { push } = useRouter()
+useEffect(() => {
+  localStorage.setItem("offset", offset)
+}, [])
+
+  async function Search() {
+    if (text === "") {
+      alert("Preencha algo");
+      setText("");
+    }
+    try {
+      const response = await API.get(
+        `https://kitsu.io/api/edge/anime?filter[text]=${text}&page[limit]=10&page[offset]=${offset}`
+      );
+      console.log(response);
+      if (response.data.meta.count === 0) {
+        alert(`Não foi encontrado nenhum anime com ${text}`);
+        setText("");
+      } else {
+        const sArray = response.data;
+        localStorage.setItem("resource", JSON.stringify(sArray));
+        localStorage.setItem("title", text);
+        window.location.href = "/AmineSpecific";
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <M.Paper
     sx={{
@@ -24,16 +53,14 @@ const SearchInput = ({ text, setText }:any) => {
         placeholder="Buscar"
           type="search"
           value={text}
-        onChange={(e: any) => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
          />
 
            <M.IconButton
         type="button"
         sx={{ p: "10px", color: "#FFF", padding: '0' }}
         aria-label="search"
-        onClick={() => {
-          push(`/Categories?category=${text}`)
-       }}
+        onClick={Search}
       >
         <SearchIcon />
       </M.IconButton>

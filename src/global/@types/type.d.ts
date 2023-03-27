@@ -4,7 +4,9 @@ export interface HomeProps {
     limit?: any
     icon?: jsx.element
     title?: any
-    specific?: any
+    text?: any
+    meta?: any
+    count?: any
 }
 
 export interface DataProps {

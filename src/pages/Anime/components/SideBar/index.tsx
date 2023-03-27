@@ -40,9 +40,7 @@ const Sidebar = ({ active }: SideProps) => {
           </S.Categorias>
           <Link href={"/"}>
             {data &&
-              Object.values(data).map((item: any, index) => {
-                console.log(item, 'item');
-                
+              Object.values(data).map((item: any, index) => {                
                 return (
                   <S.SidebarItem
                    key={index}
