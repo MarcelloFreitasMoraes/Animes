@@ -9,10 +9,11 @@ import qs from "qs";
 import PaginationComponent from "../Pagination";
 
 export default function CardListComponent(props: HomeProps) {
-  const { sort, icon, categoryes, title, text, limit } = props;
+  const { sort, icon, categoryes, title, text, limit, arrayAnime } = props;
 const [data, setData] = useState<DataProps>();
 const [offset, setOffset] = useState<number>(0);
 const { push } = useRouter();
+console.log(arrayAnime,'arrayAnime');
 
 const createUrl = () => {
   const query = {
@@ -20,7 +21,15 @@ const createUrl = () => {
       limit: limit ?? 5,
       offset,
     },
+    filter: {           
+      text           
+  }
   };
+   if (text) {
+    query.filter = {
+       text,
+     };
+   }
   let url = `https://kitsu.io/api/edge/anime?${qs.stringify(query)}`;
 
   if (sort === "user_count") {
@@ -70,6 +79,7 @@ useEffect(() => {
           {title}
         </M.Typography>
       </M.Grid>
+      {categoryes && data && (
       <S.Test>
         {data &&
           Object.values(data).map((item, index) => {
@@ -83,15 +93,38 @@ useEffect(() => {
             );
           })}
           <>
-          {categoryes &&
           <PaginationComponent
             total={data?.meta?.count}
             offset={offset}
             setOffset={setOffset}
             />
-          }
           </>
       </S.Test>
+      )}
+      <>
+      {text && arrayAnime && (
+      <S.Test>
+        {arrayAnime &&
+          Object.values(arrayAnime).map((item, index) => {
+            return (
+              <div key={index}>
+                <CardComponent
+                  action={() => push(`/Anime?id=${item.id}`)}
+                  image={item?.attributes?.posterImage?.original}
+                />
+              </div>
+            );
+          })}
+          <>
+          <PaginationComponent
+            total={arrayAnime?.meta?.count}
+            offset={offset}
+            setOffset={setOffset}
+            />
+          </>
+      </S.Test>
+      )}
+      </>
     </M.Grid>
   );
 }

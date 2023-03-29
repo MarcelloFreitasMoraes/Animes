@@ -7,6 +7,7 @@ export interface HomeProps {
     text?: any
     meta?: any
     count?: any
+    arrayAnime?: any
 }
 
 export interface DataProps {

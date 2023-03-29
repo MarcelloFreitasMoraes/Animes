@@ -5,6 +5,7 @@ import { API } from '@/global/config/api';
 
 const SearchInput = () => {
   const [text, setText] = useState("");
+  const LIMIT = 20;
   const offset: any = 0; 
 
 useEffect(() => {
@@ -18,7 +19,7 @@ useEffect(() => {
     }
     try {
       const response = await API.get(
-        `https://kitsu.io/api/edge/anime?filter[text]=${text}&page[limit]=10&page[offset]=${offset}`
+        `https://kitsu.io/api/edge/anime?filter[text]=${text}&page[limit]=${LIMIT}&page[offset]=${offset}`
       );
       console.log(response);
       if (response.data.meta.count === 0) {
@@ -28,7 +29,7 @@ useEffect(() => {
         const sArray = response.data;
         localStorage.setItem("resource", JSON.stringify(sArray));
         localStorage.setItem("title", text);
-        window.location.href = "/AmineSpecific";
+        window.location.href = `/Categories?categories=${text}`;
       }
     } catch (error) {
       console.log(error);

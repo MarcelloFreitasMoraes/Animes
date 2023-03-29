@@ -3,13 +3,13 @@ import * as M from "@mui/material";
 import * as S from "./styles";
 import { API } from "@/global/config/api";
 import { useRouter } from "next/router";
-import Header from "./components/Header";
 import BannerDefault from "@/global/assets/img/default-banner.jpg";
 import { Youtube } from "@/global/assets/Icons/youtube";
 import { Heart } from "@/global/assets/Icons/Heart";
 import { StarCat } from "@/global/assets/Icons/StarCat";
 import FooterComponent from "@/global/components/Footer";
 import Sidebar from "./components/SideBar";
+import Header from "@/global/components/Header";
 
 export default function Anime() {
   const [sidebar, setSidebar] = useState(false);
@@ -48,7 +48,7 @@ export default function Anime() {
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
-      <Header sidebar={sidebar} setSidebar={setSidebar} info={data}/>
+      <Header sidebar={sidebar} setSidebar={setSidebar} info={data} headerAnime/>
       <S.Banner
         src={
           data?.attributes?.coverImage?.small

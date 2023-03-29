@@ -4,18 +4,20 @@ import * as S from "./styles";
 import { useRouter } from "next/router";
 import Sidebar from "../Anime/components/SideBar";
 import { FaFilm } from "react-icons/fa";
-import qs from "qs";
 import CardListComponent from "@/global/components/CardListComponent";
 import PaginationComponent from "@/global/components/Pagination";
-import Header from "./components/Header";
 import CardComponent from "@/global/components/CardComponent";
+import Header from "@/global/components/Header";
+import { API } from "@/global/config/api";
+import qs from "qs";
 
 export default function Categories() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
   const [offset, setOffset] = useState(0);
   const [info, setInfo] = useState<any>({});
-  const [text, setText] = useState("");
+  const [text, setText] = useState();
+  const [arrayAnime, setArrayAnime] = useState();
   const LIMIT = 20;
   const ref = useRef(null);
   const { push } = useRouter();
@@ -34,98 +36,101 @@ export default function Categories() {
     return () => {
       document.removeEventListener("click", closeSidebar, true);
     };
-  }, []);  
+  }, []);
 
-let api = "https://kitsu.io/api/edge/";
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      setInfo({});
-      setData({})
-      const query = {
-        page: {
-          limit: LIMIT,
-          offset,          
-        },
-        filter: {           
-          text           
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const item: any = localStorage.getItem("title");
+      if (item) {
+        setText(localStorage.getItem("title"));
       }
-      };
-      // if (text) {
-      //   query.filter = {
-      //     text,
-      //   };
-      // }
-      const response = await fetch(`${api}anime?${qs.stringify(query)}`);
-      const  data  = await response.json();
-      setInfo(data);
-      setData(data);
-    } 
-    catch (error) {
-      console.log(error.toJSON());
+
+      const arrayAnime: any = JSON.parse(localStorage.getItem("resource"));
+      setArrayAnime(arrayAnime);
     }
-  };
+  }, []);
 
-  fetchData();
-}, [text, offset]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const query = {
+          page: {
+            limit: LIMIT,
+            offset,          
+          },
+          filter: {           
+            text           
+        }
+        };
+         if (text) {
+          query.filter = {
+             text,
+           };
+         }
+        const response = await API.get(`/anime?${qs.stringify(query)}`)
+        setData(response.data);
+        setInfo(response.data);        
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-console.log("data>>>>>>>>>>>>>>>>>>>>>>>",data);
+    fetchData();
+  }, [offset, text]);
+
+  console.log("data>>>>>>>>>>>>>>>>>>>>>>>", text);
+  console.log("data>>>>>>>>>>>>>>>>>>>>>>>", arrayAnime);
 
   return (
     <S.Container>
       <S.SideBarTop ref={ref} onClick={closeSidebar}>
         {sidebar && <Sidebar active={setSidebar} data={data} />}
       </S.SideBarTop>
-      <Header
-        sidebar={sidebar}
-        setSidebar={setSidebar}
-        // text={text}
-        // setText={setText}
-      />
+      <Header sidebar={sidebar} setSidebar={setSidebar} headerCategory />
       <M.Grid>
         <S.BoxText>
-          {/* {data  ? ( */}
-            {/* <> */}
-              {category && (
+          {/* {category ? ( */}
+            <>
+              {/* {category && data && ( */}
                 <M.Box>
                   <CardListComponent
-                    categoryes={category}
+                    categoryes={category ?? text}
                     limit={20}
                     icon={<FaFilm size={22} />}
-                    title={category}
-                    // text={text}                    
+                    title={category ?? text}
+                    arrayAnime={arrayAnime}
+
                   />
                 </M.Box>
-              )}
-            {/* </>
-            ) : (
-            <> */}
-              {/* {text && ( */}
-                {/* <>
-                  {info.data && (
-                    <M.Grid sx={{ marginLeft: "70px" }}>
-                      <M.Grid
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          margin: "15px 0 0 12px",
-                        }}
-                      >
-                        <FaFilm size={22} />
-                        <M.Typography
-                          sx={{
-                            color: "#F46D1B",
-                            fontSize: "22px",
-                            fontWeight: "700",
-                            paddingLeft: "10px",
-                          }}
-                        >
-                          {info?.data[0]?.attributes?.abbreviatedTitles[0]}
-                        </M.Typography>
-                      </M.Grid> */}
+              {/* )} */}
+            </>
+            {/* ) : ( */}
+            <>
+              {/* {arrayAnime && text && ( */}
+                <M.Grid sx={{ marginLeft: "70px" }}>
+                  {/* <M.Grid
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      margin: "15px 0 0 12px",
+                    }}
+                  >
+                    <FaFilm size={22} />
+                    <M.Typography
+                      sx={{
+                        color: "#F46D1B",
+                        fontSize: "22px",
+                        fontWeight: "700",
+                        paddingLeft: "10px",
+                      }}
+                    >
+                      {text}
+                    </M.Typography>
+                  </M.Grid> */}
+                  {/* {arrayAnime?.data && ( */}
+                    <>
                       {/* <S.Test>
-                        {info?.data?.map(
+                        {arrayAnime?.data?.map(
                           (
                             item: {
                               id: any;
@@ -146,24 +151,20 @@ console.log("data>>>>>>>>>>>>>>>>>>>>>>>",data);
                           }
                         )}
                       </S.Test> */}
-                    {/* </M.Grid> */}
+                      {/* <S.Main>
+                        <PaginationComponent
+                          total={info?.meta?.count}
+                          offset={offset}
+                          setOffset={setOffset}
+                        />
+                      </S.Main> */}
+                    </>
                   {/* )} */}
-                {/* </> */}
-               {/* )} */}
-            {/* </> */}
-          {/* )} */}
+                </M.Grid>
+              {/* )} */}
+            </>
+           {/* )} */}
         </S.BoxText>
-        {/* {text &&  */}
-        {/* <S.Main>
-          {info?.data && (
-          <PaginationComponent
-            total={info?.data?.meta?.count}
-            offset={offset}
-            setOffset={setOffset}
-          />
-           )} 
-        </S.Main> */}
-        {/* } */}
       </M.Grid>
     </S.Container>
   );
