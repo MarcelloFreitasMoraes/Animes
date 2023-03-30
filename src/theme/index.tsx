@@ -17,6 +17,7 @@ const THEME = createTheme({
     }
   },
   typography: {
+    "fontFamily": 'Inter',
     h3: {
       fontSize: '2.5rem',
     }

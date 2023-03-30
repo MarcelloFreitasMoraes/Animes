@@ -19,7 +19,7 @@ useEffect(() => {
     }
     try {
       const response = await API.get(
-        `https://kitsu.io/api/edge/anime?filter[text]=${text}&page[limit]=${LIMIT}&page[offset]=${offset}`
+        `/anime?filter[text]=${text}&page[limit]=${LIMIT}&page[offset]=${offset}`
       );
       console.log(response);
       if (response.data.meta.count === 0) {

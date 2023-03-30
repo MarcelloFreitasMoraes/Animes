@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as M from "@mui/material";
 import { PagComponentProps } from './type';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 export default function PaginationComponent({
   total,
@@ -24,6 +25,7 @@ export default function PaginationComponent({
         >
           Anterior
         </button>
+        <M.Button  startIcon={<ArrowBack />}></M.Button>
       </div> 
       <div>    
         <button
@@ -32,6 +34,7 @@ export default function PaginationComponent({
         >
           Próxima
         </button>
+        <M.Button  startIcon={<ArrowForward />}></M.Button>
       </div>
     </ul>
   );

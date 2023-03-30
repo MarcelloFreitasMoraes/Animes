@@ -79,7 +79,7 @@ useEffect(() => {
           {title}
         </M.Typography>
       </M.Grid>
-      {categoryes && data && (
+      {data && (
       <S.Test>
         {data &&
           Object.values(data).map((item, index) => {
@@ -93,11 +93,13 @@ useEffect(() => {
             );
           })}
           <>
+          {categoryes && (
           <PaginationComponent
             total={data?.meta?.count}
             offset={offset}
             setOffset={setOffset}
             />
+            )}
           </>
       </S.Test>
       )}
@@ -116,11 +118,13 @@ useEffect(() => {
             );
           })}
           <>
+          
           <PaginationComponent
             total={arrayAnime?.meta?.count}
             offset={offset}
             setOffset={setOffset}
             />
+          
           </>
       </S.Test>
       )}
