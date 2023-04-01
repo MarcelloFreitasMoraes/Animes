@@ -6,9 +6,9 @@ width: 100%;
 margin: 0 auto;
 `
 export const BoxText = styled(Box)`
-display: flex;
+/* display: flex;
 align-items: center;
-justify-content: center;
+justify-content: center; */
 color: var(--primary);
 `;
 export const Main = styled(Box)`

@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material'
 import { useRouter } from 'next/router';
 import THEME from '@/theme'
 import { GlobalStyle } from "../styles/globals";

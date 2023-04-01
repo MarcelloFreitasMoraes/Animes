@@ -89,9 +89,9 @@ export default function Categories() {
       <Header sidebar={sidebar} setSidebar={setSidebar} headerCategory />
       <M.Grid>
         <S.BoxText>
-          {/* {category ? ( */}
+          {category ? (
             <>
-              {/* {category && data && ( */}
+              {category && data && (
                 <M.Box>
                   <CardListComponent
                     categoryes={category ?? text}
@@ -102,13 +102,13 @@ export default function Categories() {
 
                   />
                 </M.Box>
-              {/* )} */}
+              )}
             </>
-            {/* ) : ( */}
+            ) : ( 
             <>
-              {/* {arrayAnime && text && ( */}
+            {arrayAnime && text && (
                 <M.Grid sx={{ marginLeft: "70px" }}>
-                  {/* <M.Grid
+                 <M.Grid
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -126,10 +126,10 @@ export default function Categories() {
                     >
                       {text}
                     </M.Typography>
-                  </M.Grid> */}
-                  {/* {arrayAnime?.data && ( */}
+                  </M.Grid> 
+                 {arrayAnime?.data && (
                     <>
-                      {/* <S.Test>
+                       <S.Test>
                         {arrayAnime?.data?.map(
                           (
                             item: {
@@ -150,20 +150,20 @@ export default function Categories() {
                             );
                           }
                         )}
-                      </S.Test> */}
-                      {/* <S.Main>
+                      </S.Test> 
+                      <S.Main>
                         <PaginationComponent
                           total={info?.meta?.count}
                           offset={offset}
                           setOffset={setOffset}
                         />
-                      </S.Main> */}
+                      </S.Main> 
                     </>
-                  {/* )} */}
+                  )} 
                 </M.Grid>
-              {/* )} */}
+               )} 
             </>
-           {/* )} */}
+         )} 
         </S.BoxText>
       </M.Grid>
     </S.Container>
