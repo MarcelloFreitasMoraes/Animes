@@ -17,25 +17,20 @@ export default function PaginationComponent({
     setOffset((page - 1) * LIMIT);
   }
   return (
-    <ul className="pagination">
-      <div>
-        <button
-          onClick={() => onPageChange(current - 1)}
-          disabled={current === 1}
-        >
-          Anterior
-        </button>
-        <M.Button  startIcon={<ArrowBack />}></M.Button>
+    <div>
+      <div>      
+        <M.Button  
+         onClick={() => onPageChange(current - 1)}
+         disabled={current === 1}
+        startIcon={<ArrowBack />}
+        />
       </div> 
-      <div>    
-        <button
+      <div> 
+       <M.Button  
           onClick={() => onPageChange(current + 1)}
           disabled={current === pages}
-        >
-          Próxima
-        </button>
-        <M.Button  startIcon={<ArrowForward />}></M.Button>
+          startIcon={<ArrowForward />}/>       
       </div>
-    </ul>
+    </div>
   );
 }

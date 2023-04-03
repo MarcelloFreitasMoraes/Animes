@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import * as M from "@mui/material";
 import * as S from "./styles";
 import { useRouter } from "next/router";
-import Sidebar from "../Anime/components/SideBar";
 import { FaFilm } from "react-icons/fa";
 import CardListComponent from "@/global/components/CardListComponent";
 import Header from "@/global/components/Header";
+import Sidebar from "../Anime/components/SideBar";
 
-export default function Categories() {
+export default function SearchAnimes () {
   const [sidebar, setSidebar] = useState(false);
-  const ref = useRef(null);
+
   const router = useRouter();
-  const { category } = router.query;
+  const ref = useRef(null);
+  const { text } = router.query;
 
   const closeSidebar = (event: any) => {
     //@ts-ignore
@@ -36,12 +37,14 @@ export default function Categories() {
       <M.Grid>
         <S.BoxText>                      
                 <M.Box>
+                  {text && (
                   <CardListComponent
-                    categoryes={category}
+                    text={text}
                     limit={20}
                     icon={<FaFilm size={22} />}
-                    title={category}
+                    title={text}
                   />
+                  )}
                 </M.Box>
         </S.BoxText>
       </M.Grid>

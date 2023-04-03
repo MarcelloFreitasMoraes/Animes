@@ -10,15 +10,18 @@ import { StarCat } from "@/global/assets/Icons/StarCat";
 import FooterComponent from "@/global/components/Footer";
 import Sidebar from "./components/SideBar";
 import Header from "@/global/components/Header";
-
+import { Loading } from "@/global/components/Loading";
+ 
 export default function Anime() {
   const [sidebar, setSidebar] = useState(false);
   const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState(false);
   const ref = useRef(null);
 
   const router = useRouter();
   const { id } = router.query;
-
+  const BannerNot = 'https://www.mub.eps.manchester.ac.uk/thebeam/wp-content/themes/uom-theme/assets/images/default-banner.jpg' 
+  const notImge = 'https://media.kitsu.io/anime/poster_images/11501/original.jpg'
   const closeSidebar = (event: any) => {
     //@ts-ignore
     if (ref.current && !ref.current.contains(event.target)) {
@@ -34,9 +37,11 @@ export default function Anime() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     API.get(`/anime/${id}`)
       .then((response) => {
         setData(response.data.data);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error.toJSON());
@@ -53,13 +58,17 @@ export default function Anime() {
         src={
           data?.attributes?.coverImage?.small
             ? data?.attributes?.coverImage?.small
-            : BannerDefault
+            : BannerNot
         }
         alt="Banner"
       />
       <M.Container sx={{display: 'flex'}}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
       <S.Main>
-        <S.Capa src={data?.attributes?.posterImage?.small} alt="Capa" />
+        <S.Capa src={data?.attributes?.posterImage?.small ?? notImge} alt="Capa" />
         <M.Grid
           sx={{
             display: "flex",
@@ -75,7 +84,7 @@ export default function Anime() {
         <M.Typography
           sx={{ color: "#16A085", fontSize: "14px", fontWeight: "500" }}
         >
-          Aprovado por {data?.attributes?.averageRating}% <br /> da Comunidade
+          Aprovado por {data?.attributes?.averageRating ?? '0'}% <br /> da Comunidade
         </M.Typography>
         <M.Grid
           sx={{
@@ -89,25 +98,27 @@ export default function Anime() {
             sx={{ fontSize: "14px", fontWeight: "500", color: "#3D3D3D", marginRight: '49px' }}
           >
             {" "}
-            <Heart /> # {data?.attributes?.popularityRank} Mais Popular
+            <Heart /> # {data?.attributes?.popularityRank ?? '0'} Mais Popular
           </M.Typography>
           <M.Grid>
             <M.Typography
               sx={{ fontSize: "14px", fontWeight: "500", color: "#3D3D3D", marginTop: '10px' }}
             >
-              <StarCat /> # {data?.attributes?.ratingRank} Melhor Classificado
+              <StarCat /> # {data?.attributes?.ratingRank ?? '0'} Melhor Classificado
             </M.Typography>
           </M.Grid>
         </M.Grid>
       </S.Main>
         <M.Grid sx={{display: "flex", flexDirection: 'column'}}>
             <M.Typography sx={{margin: '10px 0', textTransform: 'capitalize', fontSize: "26px", fontWeight: "700"}}>
-            {data?.attributes?.slug}
+            {data?.attributes?.slug ?? 'Desconhecido'}
             </M.Typography>
             <M.Typography sx={{fontSize: "14px", fontWeight: "400"}}>
-            {data?.attributes?.description}
+            {data?.attributes?.description ?? 'Sem dados'}
             </M.Typography>
         </M.Grid>
+        </>
+      )}
         </M.Container>
         <M.Grid sx={{marginTop: '18.5rem'}}>
        <FooterComponent/> 

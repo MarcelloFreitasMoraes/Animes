@@ -28,7 +28,7 @@ export default function Header({
               <S.Img onClick={() => push(`/`)}>
                 <Image src={Logo} alt="Logo" width={192} height={118} />
               </S.Img>
-              <M.Grid sx={{ position: "absolute", top: "3%", left: "78%" }}>
+              <M.Grid sx={{ position: "absolute", top: "5%", left: "78%" }}>
                 <SearchInput />
               </M.Grid>
             </M.Grid>

@@ -1,13 +1,12 @@
 export interface HomeProps {
     sort?: string
-    categoryes?: any
     limit?: any
     icon?: jsx.element
     title?: any
     text?: any
     meta?: any
     count?: any
-    arrayAnime?: any
+    categoryes?: any
 }
 
 export interface DataProps {

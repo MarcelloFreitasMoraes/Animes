@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as M from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { API } from '@/global/config/api';
+import { Loading } from '../Loading';
 
 const SearchInput = () => {
   const [text, setText] = useState("");
@@ -29,7 +30,7 @@ useEffect(() => {
         const sArray = response.data;
         localStorage.setItem("resource", JSON.stringify(sArray));
         localStorage.setItem("title", text);
-        window.location.href = `/Categories?categories=${text}`;
+        window.location.href = `/SearchAnimes?text=${text}`;
       }
     } catch (error) {
       console.log(error);

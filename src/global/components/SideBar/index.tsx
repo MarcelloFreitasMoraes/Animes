@@ -6,16 +6,18 @@ import { FaList, FaTimes } from "react-icons/fa";
 import { SideProps } from "./types";
 import { getCategorias } from "@/services/AnimeService";
 import { useRouter } from "next/router";
+import { DataProps } from "@/global/@types/type";
 
 const Sidebar = ({ active }: SideProps) => {
-  const [data, setData] = useState<any>();
-  const { push } = useRouter()
+  const [data, setData] = useState<DataProps>(); 
+  const { push } = useRouter();
   const closeSidebar = () => {
     active(false);
   };
 
   useEffect(() => {
-    getCategorias().then((response: any) => {
+    getCategorias()
+      .then((response: any) => {
         setData(response?.data?.data);
       })
       .catch(function (error) {
@@ -39,16 +41,26 @@ const Sidebar = ({ active }: SideProps) => {
           </S.Categorias>
           <Link href={"/"}>
             {data &&
-              Object.values(data).map((item: any, index) => {
+              Object.values(data).map((item, index) => {
                 return (
-                  
-                  <S.SidebarItem 
-                  key={index}
-                  onClick={() => push(`/Categories?category=${item?.attributes?.slug}`)}
+                  <S.SidebarItem
+                    key={index}
+                    onClick={() =>
+                      push(`/Categories?category=${item?.attributes?.slug}`)
+                    }
                   >
-                    {item?.attributes?.slug}
+                    <M.Typography
+                      variant="h6"
+                      sx={{
+                        color: "#FFF",
+                        fontWeight: "400",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {" "}
+                      {item?.attributes?.slug ?? 'Desconhecido'}
+                    </M.Typography>
                   </S.SidebarItem>
-                  
                 );
               })}
           </Link>

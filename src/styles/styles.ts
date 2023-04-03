@@ -7,6 +7,10 @@ margin: 0 auto;
 `
 export const ContantSlider = styled(Box)`
 margin-top: -50px;
+
+svg {
+   margin-right: 90px;
+}
 `;
 export const Back = styled(Box)`
 width: 100%;
