@@ -17,8 +17,6 @@ export default function CardListSearchComponent(props: HomeProps) {
   const { push } = useRouter();
   const notImge = 'https://media.kitsu.io/anime/poster_images/11501/original.jpg'
 
-
-
   useEffect(() => {
     setLoading(true);
     API.get(`/anime?filter[text]=${text}&page[limit]=${limit}&page[offset]=${offset}`)
@@ -33,7 +31,7 @@ export default function CardListSearchComponent(props: HomeProps) {
   }, [sort, text, offset]);
 
   return (
-    <M.Grid sx={{ marginLeft: "70px" }}>
+    <M.Grid sx={{ marginLeft: "10rem" }}>
        {loading ? (
         <Loading />
       ) : (
@@ -51,7 +49,7 @@ export default function CardListSearchComponent(props: HomeProps) {
           }}
         >
           {title}
-        </M.Typography>
+        </M.Typography>      
       </M.Grid>
       {data && text && (
         <S.Test>

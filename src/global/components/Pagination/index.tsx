@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as M from "@mui/material";
+import * as S from "./styles";
 import { PagComponentProps } from './type';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
@@ -17,20 +18,22 @@ export default function PaginationComponent({
     setOffset((page - 1) * LIMIT);
   }
   return (
-    <div>
-      <div>      
+    <S.Container>
+      <S.ContainerButton>      
         <M.Button  
+        sx={{color: '#FFFFFF', marginRight: '10px'}} 
          onClick={() => onPageChange(current - 1)}
          disabled={current === 1}
         startIcon={<ArrowBack />}
         />
-      </div> 
-      <div> 
-       <M.Button  
+      </S.ContainerButton> 
+      <S.ContainerButton> 
+       <M.Button 
+       sx={{color: '#FFFFFF'}} 
           onClick={() => onPageChange(current + 1)}
           disabled={current === pages}
           startIcon={<ArrowForward />}/>       
-      </div>
-    </div>
+      </S.ContainerButton>
+    </S.Container>
   );
 }

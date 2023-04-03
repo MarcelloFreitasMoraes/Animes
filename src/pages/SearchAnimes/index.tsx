@@ -3,9 +3,9 @@ import * as M from "@mui/material";
 import * as S from "./styles";
 import { useRouter } from "next/router";
 import { FaFilm } from "react-icons/fa";
-import CardListComponent from "@/global/components/CardListComponent";
 import Header from "@/global/components/Header";
 import Sidebar from "../Anime/components/SideBar";
+import CardListSearchComponent from "@/global/components/CardListSearch";
 
 export default function SearchAnimes () {
   const [sidebar, setSidebar] = useState(false);
@@ -38,7 +38,7 @@ export default function SearchAnimes () {
         <S.BoxText>                      
                 <M.Box>
                   {text && (
-                  <CardListComponent
+                  <CardListSearchComponent
                     text={text}
                     limit={20}
                     icon={<FaFilm size={22} />}

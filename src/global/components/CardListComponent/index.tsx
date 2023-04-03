@@ -66,7 +66,7 @@ export default function CardListComponent(props: HomeProps) {
   }, [sort, categoryes, text, offset]);
 
   return (
-    <M.Grid sx={{ marginLeft: "70px" }}>
+    <M.Grid sx={{ marginLeft: "10rem" }}>
       {loading ? (
         <Loading />
       ) : (
