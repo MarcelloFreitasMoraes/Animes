@@ -13,6 +13,6 @@
 //     return response.data.data;
 // }
 
-// export{ 
+// export{
 //     getCategories
 // }

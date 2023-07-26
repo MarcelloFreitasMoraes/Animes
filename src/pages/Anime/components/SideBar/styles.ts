@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.section`
     background-color: var(--primary);
@@ -7,9 +7,9 @@ export const Container = styled.section`
     top: 0px;
     left: 0px;
     width: 280px;
-    animation: showSidebar .1s;
+    animation: showSidebar 0.1s;
     z-index: 999;
-    height: 92rem; 
+    height: 92rem;
     > svg {
         position: absolute;
         color: white;
@@ -21,47 +21,47 @@ export const Container = styled.section`
     }
     @keyframes showSidebar {
         from {
-        opacity: 0;
-        width: 0;
+            opacity: 0;
+            width: 0;
         }
         to {
-        opacity: 1;
-        width: 280px;
+            opacity: 1;
+            width: 280px;
         }
     }
-`;
+`
 
-export const Categorias = styled.div `
+export const Categorias = styled.div`
     display: flex;
     margin: 0 auto 10px auto;
     color: var(--light);
     font-size: 20px;
     font-weight: 700;
 
-    > svg{
+    > svg {
         width: 20px;
         height: 23px;
         margin-right: 7px;
     }
-`;
-export const DisplayFlex = styled.div `
+`
+export const DisplayFlex = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-`;
+`
 
-export const Content = styled.div `
+export const Content = styled.div`
     margin-top: 70px;
     display: flex;
     flex-direction: column;
-`;
+`
 
-export const Item = styled.p `
+export const Item = styled.p`
     text-transform: uppercase;
-`;
+`
 
-export const SidebarItem = styled.div `
+export const SidebarItem = styled.div`
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -71,11 +71,11 @@ export const SidebarItem = styled.div `
     cursor: pointer;
     margin-left: 50px;
     text-transform: capitalize;
-`;
+`
 
-export const ContainerContent = styled.div `
+export const ContainerContent = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
     justify-content: space-between;
-`;
+`

@@ -1,56 +1,60 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.section`
-width:100%;
- margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 
-#app {
-  height: 100%;
-}
-html,
-body {
-  position: relative;
-  height: 100%;
-}
+    #app {
+        height: 100%;
+    }
+    html,
+    body {
+        position: relative;
+        height: 100%;
+    }
 
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
+    body {
+        background: #eee;
+        font-family:
+            Helvetica Neue,
+            Helvetica,
+            Arial,
+            sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: var(--light);
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: var(--light);
 
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.swiper-pagination-bullet-active {
-     background-color: var(--primary) !important;
-}
+    .swiper-pagination-bullet-active {
+        background-color: var(--primary) !important;
+    }
 
-.swiper-pagination-bullets{
-    top: 3px !important;
-    position: relative !important;
-}
+    .swiper-pagination-bullets {
+        top: 3px !important;
+        position: relative !important;
+    }
 `

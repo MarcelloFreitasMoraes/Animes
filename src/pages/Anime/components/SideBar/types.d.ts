@@ -1,4 +1,3 @@
-
 export interface SideProps {
     active: any
     attributes?: Array<string>
